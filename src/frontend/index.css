@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Plus Jakarta Sans (body) ──────────────────────────── */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/assets/fonts/PlusJakartaSans-Variable.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Fraunces (display / headings) ──────────────────────── */
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Geist Mono (mono/code) ─────────────────────────────── */
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* ── Meeting Mind dark-navy palette ────────────────── */
+    /* Background: deep navy #0A1628 ≈ oklch(0.155 0.035 252) */
+    --background:           0.155 0.035 252;
+    /* Card: #111f35 ≈ oklch(0.20 0.032 252) */
+    --card:                 0.20 0.032 252;
+    --card-foreground:      0.92 0.008 252;
+    /* Popover */
+    --popover:              0.22 0.030 252;
+    --popover-foreground:   0.92 0.008 252;
+
+    /* Primary = emerald #10B981 ≈ oklch(0.70 0.165 162) */
+    --primary:              0.70 0.165 162;
+    --primary-foreground:   0.10 0.02 252;
+
+    /* Secondary */
+    --secondary:            0.26 0.028 252;
+    --secondary-foreground: 0.82 0.012 252;
+
+    /* Muted */
+    --muted:                0.26 0.026 252;
+    --muted-foreground:     0.58 0.018 252;
+
+    /* Accent = emerald tint */
+    --accent:               0.22 0.04 162;
+    --accent-foreground:    0.78 0.14 162;
+
+    /* Destructive */
+    --destructive:          0.62 0.22 25;
+    --destructive-foreground: 0.97 0 0;
+
+    /* Foreground (main text) #EEF2F7 ≈ oklch(0.92 0.008 252) */
+    --foreground:           0.92 0.008 252;
+
+    /* Border & Input */
+    --border:               0.32 0.024 252;
+    --input:                0.26 0.028 252;
+    --ring:                 0.70 0.165 162;
+
+    /* Semantic extras */
+    --emerald:              0.70 0.165 162;
+    --emerald-dim:          0.55 0.12 162;
+    --navy-surface:         0.20 0.032 252;
+    --navy-surface-2:       0.245 0.030 252;
+
+    /* Charts */
+    --chart-1: 0.70 0.165 162;
+    --chart-2: 0.72 0.16 200;
+    --chart-3: 0.65 0.18 280;
+    --chart-4: 0.78 0.15 75;
+    --chart-5: 0.62 0.22 25;
+
+    --sidebar: 0.20 0.032 252;
+    --sidebar-foreground: 0.92 0.008 252;
+    --sidebar-primary: 0.70 0.165 162;
+    --sidebar-primary-foreground: 0.10 0.02 252;
+    --sidebar-accent: 0.22 0.04 162;
+    --sidebar-accent-foreground: 0.78 0.14 162;
+    --sidebar-border: 0.32 0.024 252;
+    --sidebar-ring: 0.70 0.165 162;
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Fraunces", ui-serif, Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* ── Custom scrollbar ───────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: oklch(0.32 0.024 252);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.40 0.03 252);
+}
+
+/* ── Fade + slide in ─────────────────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fade-up 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* ── Stagger children ──────────────────────────────────────── */
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+
+/* ── Accordion animation ───────────────────────────────── */
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+/* ── Tag chip pill ─────────────────────────────────────── */
+.tag-chip {
+  @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium;
+  background: oklch(0.22 0.04 162);
+  color: oklch(0.78 0.14 162);
+  border: 1px solid oklch(0.35 0.08 162 / 0.5);
+}
+
+/* ── Print styles ──────────────────────────────────────── */
+@media print {
+  .no-print { display: none !important; }
+  body { background: white; color: black; }
+  .print-section { page-break-inside: avoid; }
+}
+
+/* ── Gradient mesh background ─────────────────────────── */
+.mesh-bg {
+  background-color: oklch(0.155 0.035 252);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 10% 0%, oklch(0.22 0.04 162 / 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 100%, oklch(0.22 0.04 252 / 0.12) 0%, transparent 60%);
+}
